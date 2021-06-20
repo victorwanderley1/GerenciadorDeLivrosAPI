@@ -20,14 +20,13 @@ import java.util.Properties;
  */
 public class ConnectionFactory {
     public static Connection getConnection(){
-        Connection connection = null;
         try{
-            connection = DriverManager.getConnection(getURL(), getUserDb(), 
+            Connection connection = DriverManager.getConnection(getURL(), getUserDb(), 
                     getPassword());
+            return connection;
         }catch (SQLException e){
             throw new FalhaConexaoException(e.getMessage());
         }
-        return connection;
     }
         
     private static InputStream loadFileProperties(){
