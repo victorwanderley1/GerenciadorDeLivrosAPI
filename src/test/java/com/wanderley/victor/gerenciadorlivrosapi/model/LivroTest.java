@@ -1,5 +1,6 @@
 package com.wanderley.victor.gerenciadorlivrosapi.model;
 
+import com.wanderley.victor.gerenciadorlivrosapi.model.Livro;
 import com.wanderley.victor.gerenciadorlivrosapi.model.LivroImpl;
 import com.wanderley.victor.gerenciadorlivrosapi.model.AutorImpl;
 import com.wanderley.victor.gerenciadorlivrosapi.model.Categoria;
