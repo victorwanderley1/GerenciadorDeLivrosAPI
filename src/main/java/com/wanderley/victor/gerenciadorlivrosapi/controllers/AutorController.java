@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/autor")
 public class AutorController {
     @Autowired
-    private final AutorService autorService = new AutorServiceImpl();
+    AutorService autorService = new AutorServiceImpl();
     
     @GetMapping
     ResponseEntity<List<Autor>> findAll() {
