@@ -28,17 +28,16 @@ class AutorDAO {
             throw new FalhaConexaoException(e.getMessage());
         }
     }
-
-    private PreparedStatement getPreparedStatementFindAll(final Connection connection) throws SQLException {
-        PreparedStatement prst = connection.prepareStatement(getSqlFindAll());
-        return prst;
-    }
-    
     private String getSqlFindAll(){
         return "SELECT * FROM autor";
     }
     
-    private Autor getAutor(ResultSet result) throws SQLException{
+    private PreparedStatement getPreparedStatementFindAll(
+            final Connection connection) throws SQLException {
+        return connection.prepareStatement(getSqlFindAll());
+    }
+    
+    private Autor getAutor(final ResultSet result) throws SQLException{
         Autor autor = new AutorImpl();
         autor.setNome(result.getString("nome"));
         autor.setSobrenome(result.getString("sobrenome"));
@@ -46,7 +45,7 @@ class AutorDAO {
         return autor;
     }
     
-    private List<Autor> getAutores(ResultSet result) throws SQLException{
+    private List<Autor> getAutores(final ResultSet result) throws SQLException{
         List<Autor> autores = new ArrayList();
         while(result.next()){
             autores.add(getAutor(result));
@@ -56,11 +55,11 @@ class AutorDAO {
     
     public Boolean addAutor(final Autor autor){
         try(Connection connection = ConnectionFactory.getConnection()){
-            int rowAfected = insert(connection, autor);
+            insert(connection, autor);
             return true;
             //Alterar retorno para Autor;
         }catch(Exception e){
-            throw new RuntimeException();
+            throw new FalhaConexaoException(e.getMessage());
         }
     }
     
