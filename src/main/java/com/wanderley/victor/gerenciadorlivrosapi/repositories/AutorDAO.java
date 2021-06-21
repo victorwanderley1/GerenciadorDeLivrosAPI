@@ -53,4 +53,37 @@ class AutorDAO {
         }
         return autores;
     }
+    
+    public Boolean addAutor(final Autor autor){
+        try(Connection connection = ConnectionFactory.getConnection()){
+            int rowAfected = insert(connection, autor);
+            return true;
+            //Alterar retorno para Autor;
+        }catch(Exception e){
+            throw new RuntimeException();
+        }
+    }
+    
+    private String getSQLAdd(){
+        return "INSERT INTO autor(idautor, nome, sobrenome) VALUES (?,?)";
+    }
+    
+    private PreparedStatement getPreparedStatementAdd(final Connection connection) throws SQLException{
+        return connection.prepareStatement(getSQLAdd());
+    }
+    
+    private PreparedStatement prepareAutorToAdd(final Connection connection, final Autor autor) throws SQLException{
+        return setAutorOnStatement(getPreparedStatementAdd(connection), autor);
+    }
+    
+    private PreparedStatement setAutorOnStatement(final PreparedStatement prst, final Autor autor) throws SQLException{
+        prst.setString(0, autor.getNome());
+        prst.setString(1, autor.getSobrenome());
+        return prst;
+    }
+    
+    private Integer insert(final Connection connection, final Autor autor) throws SQLException{
+        return prepareAutorToAdd(connection, autor).executeUpdate();
+    }
+    
 }
