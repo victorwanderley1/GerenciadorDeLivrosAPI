@@ -6,7 +6,6 @@
 package com.wanderley.victor.gerenciadorlivrosapi.repositories;
 
 import com.wanderley.victor.gerenciadorlivrosapi.model.Autor;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
