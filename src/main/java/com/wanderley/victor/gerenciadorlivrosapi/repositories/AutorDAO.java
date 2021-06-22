@@ -21,6 +21,9 @@ import java.util.List;
  * @author Victor Wanderley <wanderley.victor>
  */
 class AutorDAO {
+    //<--------------------------Métodos de busca------------------------------>
+    
+    
     protected List<Autor> findAll(){
         try(Connection connection = ConnectionFactory.getConnection()){
             return getAutores(getPreparedStatementFindAll(connection).executeQuery());
@@ -28,6 +31,7 @@ class AutorDAO {
             throw new FalhaConexaoException(e.getMessage());
         }
     }
+    
     private String getSqlFindAll(){
         return "SELECT * FROM autor";
     }
@@ -52,6 +56,32 @@ class AutorDAO {
         }
         return autores;
     }
+    
+     public Autor findById(final Integer id){
+        try(Connection connection = ConnectionFactory.getConnection()){
+            return getAutor(getPreparedStatementFindById(connection, id)
+                    .executeQuery());
+        }catch(SQLException e){
+            throw new FalhaConexaoException(e.getMessage());
+        }
+    }
+
+    private static String getSqlFindById() {
+        return "SELECT * FROM autor WHERE idAutor = ?";
+    }
+     
+     private PreparedStatement getPreparedStatementFindById(
+            final Connection connection, Integer id) throws SQLException {
+        return setIdOnStatement(id, connection.prepareStatement(getSqlFindById()));
+    }
+     
+    private PreparedStatement setIdOnStatement(final Integer id, final PreparedStatement prst) throws SQLException{
+        prst.setInt(0, id);
+        return prst;
+    }
+    
+    
+    //<------------------------Métodos insert---------------------------------->
     
     public Boolean addAutor(final Autor autor){
         try(Connection connection = ConnectionFactory.getConnection()){
