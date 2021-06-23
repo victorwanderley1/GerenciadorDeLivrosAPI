@@ -59,24 +59,29 @@ class AutorDAO {
     
      public Autor findById(final Integer id){
         try(Connection connection = ConnectionFactory.getConnection()){
-            return getAutor(getPreparedStatementFindById(connection, id)
+            return getAutorById(getPreparedStatementFindById(connection, id)
                     .executeQuery());
         }catch(SQLException e){
             throw new FalhaConexaoException(e.getMessage());
         }
+    }
+     
+    private Autor getAutorById(final ResultSet result) throws SQLException{
+        result.next();
+        return getAutor(result);
     }
 
     private static String getSqlFindById() {
         return "SELECT * FROM autor WHERE idAutor = ?";
     }
      
-     private PreparedStatement getPreparedStatementFindById(
+    private PreparedStatement getPreparedStatementFindById(
             final Connection connection, Integer id) throws SQLException {
         return setIdOnStatement(id, connection.prepareStatement(getSqlFindById()));
     }
      
     private PreparedStatement setIdOnStatement(final Integer id, final PreparedStatement prst) throws SQLException{
-        prst.setInt(0, id);
+        prst.setInt(1, id);
         return prst;
     }
     
@@ -106,8 +111,8 @@ class AutorDAO {
     }
     
     private PreparedStatement setAutorOnStatement(final PreparedStatement prst, final Autor autor) throws SQLException{
-        prst.setString(0, autor.getNome());
-        prst.setString(1, autor.getSobrenome());
+        prst.setString(1, autor.getNome());
+        prst.setString(2, autor.getSobrenome());
         return prst;
     }
     
