@@ -143,4 +143,34 @@ class AutorDAO {
         PreparedStatement prst = connection.prepareStatement(sqlDelete());
         return setIdOnStatement(id, prst);
     }
+
+//<-----------------------------Métodos Update--------------------------------->
+    
+    public Boolean updateAutor(final Integer id, final Autor autor){
+        try(Connection connection = ConnectionFactory.getConnection()){
+            String sql = "UPDATE autor SET nome = ?, sobrenome = ? WHERE idautor = ?";
+            if(id!=0){
+                Autor autorInDB = findById(id);
+                if((autorInDB != null)){
+                    if(!autor.getNome().isBlank()){
+                        autorInDB.setNome(autor.getNome());
+                    }
+                    if(!autor.getSobrenome().isBlank()){
+                        autorInDB.setSobrenome(autor.getSobrenome());
+                    }
+                    PreparedStatement prst = connection.prepareStatement(sql);
+                    prst.setString(1, autorInDB.getNome());
+                    prst.setString(2, autorInDB.getSobrenome());
+                    Integer rowAfect = prst.executeUpdate();
+                    return rowAfect != 0;
+                }
+            }
+        }catch (SQLException e){
+            
+        }
+        
+        
+        return false;
+    }
+    
 }
