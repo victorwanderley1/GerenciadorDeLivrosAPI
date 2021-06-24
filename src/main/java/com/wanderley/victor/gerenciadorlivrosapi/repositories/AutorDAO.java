@@ -89,13 +89,15 @@ class AutorDAO {
     //<------------------------Métodos insert---------------------------------->
     
     public Boolean addAutor(final Autor autor){
-        try(Connection connection = ConnectionFactory.getConnection()){
-            insert(connection, autor);
-            return true;
-            //Alterar retorno para Autor;
-        }catch(Exception e){
-            throw new FalhaConexaoException(e.getMessage());
-        }
+        if(autor != null){
+            try(Connection connection = ConnectionFactory.getConnection()){
+                insert(connection, autor);
+                return true;
+                //Alterar retorno para Autor;
+            }catch(Exception e){
+                throw new FalhaConexaoException(e.getMessage());
+            }
+        } return false;    
     }
     
     private String getSQLAdd(){
