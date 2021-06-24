@@ -135,12 +135,12 @@ class AutorDAO {
         }
         return false;
     }
-    private String sqlDelete(){
+    private String getSqlDelete(){
         return "DELETE FROM autor WHERE idautor = ?"; 
     }
     
     private PreparedStatement getPreparedStatementDelete(final Connection connection, final Integer id) throws SQLException{
-        PreparedStatement prst = connection.prepareStatement(sqlDelete());
+        PreparedStatement prst = connection.prepareStatement(getSqlDelete());
         return setIdOnStatement(id, prst);
     }
 
