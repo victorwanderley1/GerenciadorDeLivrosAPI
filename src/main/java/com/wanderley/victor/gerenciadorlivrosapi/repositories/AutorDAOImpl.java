@@ -20,11 +20,11 @@ import java.util.List;
  *
  * @author Victor Wanderley <wanderley.victor>
  */
-class AutorDAOImpl {
+class AutorDAOImpl implements AutorDAO {
     //<--------------------------Métodos de busca------------------------------>
     
-    
-    protected List<Autor> findAll(){
+    @Override
+    public List<Autor> findAll(){
         try(Connection connection = ConnectionFactory.getConnection()){
             return getAutores(getPreparedStatementFindAll(connection).executeQuery());
         }catch(SQLException e){
@@ -57,7 +57,8 @@ class AutorDAOImpl {
         return autores;
     }
     
-     public Autor findById(final Integer id){
+    @Override
+    public Autor findById(final Integer id){
         try(Connection connection = ConnectionFactory.getConnection()){
             return getAutorById(getPreparedStatementFindById(connection, id)
                     .executeQuery());
@@ -88,6 +89,7 @@ class AutorDAOImpl {
     
     //<------------------------Métodos insert---------------------------------->
     
+    @Override
     public Boolean addAutor(final Autor autor){
         if(autor != null){
             try(Connection connection = ConnectionFactory.getConnection()){
@@ -124,6 +126,7 @@ class AutorDAOImpl {
 
     //<--------------------------Metodos Delete------------------------------------>
 
+    @Override
     public Boolean deleteAutor(final Integer id){
         try(Connection connection = ConnectionFactory.getConnection()){
             final int rowsAfect = getPreparedStatementDelete(connection, id).executeUpdate();
@@ -146,6 +149,7 @@ class AutorDAOImpl {
 
 //<-----------------------------Métodos Update--------------------------------->
     
+    @Override
     public Boolean updateAutor(final Integer id, final Autor autor){
         try(Connection connection = ConnectionFactory.getConnection()){
             Autor autorDB = findById(id);
