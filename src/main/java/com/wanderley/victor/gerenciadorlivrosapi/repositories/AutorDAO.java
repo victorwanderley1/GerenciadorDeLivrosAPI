@@ -121,5 +121,22 @@ class AutorDAO {
     private Integer insert(final Connection connection, final Autor autor) throws SQLException{
         return prepareAutorToAdd(connection, autor).executeUpdate();
     }
+
+    //<--------------------------Metodos Delete------------------------------------>
+
+    public Boolean deleteAutor(Integer id){
+        try(Connection connection = ConnectionFactory.getConnection()){
+            String sql = "DELETE FROM autor WHERE idautor = ?";
+            final PreparedStatement prst = connection.prepareStatement(sql);
+            prst.setInt(1, id);
+            final int rowsAfect = prst.executeUpdate();
+            if(rowsAfect != 0){
+                return true;
+            }
+        }catch (Exception e){
+            
+        }
+        return false;
+    }
     
 }
