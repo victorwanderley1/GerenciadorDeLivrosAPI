@@ -124,19 +124,23 @@ class AutorDAO {
 
     //<--------------------------Metodos Delete------------------------------------>
 
-    public Boolean deleteAutor(Integer id){
+    public Boolean deleteAutor(final Integer id){
         try(Connection connection = ConnectionFactory.getConnection()){
-            String sql = "DELETE FROM autor WHERE idautor = ?";
-            final PreparedStatement prst = connection.prepareStatement(sql);
-            prst.setInt(1, id);
-            final int rowsAfect = prst.executeUpdate();
+            final int rowsAfect = getPreparedStatementDelete(connection, id).executeUpdate();
             if(rowsAfect != 0){
                 return true;
             }
-        }catch (Exception e){
-            
+        }catch (SQLException e){
+            throw new FalhaConexaoException(e.getMessage());
         }
         return false;
     }
+    private String sqlDelete(){
+        return "DELETE FROM autor WHERE idautor = ?"; 
+    }
     
+    private PreparedStatement getPreparedStatementDelete(final Connection connection, final Integer id) throws SQLException{
+        PreparedStatement prst = connection.prepareStatement(sqlDelete());
+        return setIdOnStatement(id, prst);
+    }
 }
