@@ -9,11 +9,13 @@ import com.wanderley.victor.gerenciadorlivrosapi.model.Categoria;
 import com.wanderley.victor.gerenciadorlivrosapi.model.CategoriaImpl;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  *
  * @author Victor Wanderley <wanderley.victor>
  */
+@SpringBootTest
 public class CategoriaTest {
     
     public CategoriaTest() {

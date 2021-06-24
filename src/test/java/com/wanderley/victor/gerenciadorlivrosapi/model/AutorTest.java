@@ -1,14 +1,14 @@
 package com.wanderley.victor.gerenciadorlivrosapi.model;
 
-import com.wanderley.victor.gerenciadorlivrosapi.model.Autor;
-import com.wanderley.victor.gerenciadorlivrosapi.model.AutorImpl;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  *
  * @author Victor Wanderley <wanderley.victor>
  */
+@SpringBootTest
 public class AutorTest {
     
     public AutorTest() {

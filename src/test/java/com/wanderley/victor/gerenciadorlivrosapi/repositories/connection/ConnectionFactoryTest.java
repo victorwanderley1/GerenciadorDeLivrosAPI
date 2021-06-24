@@ -5,16 +5,17 @@
  */
 package com.wanderley.victor.gerenciadorlivrosapi.repositories.connection;
 
-import com.wanderley.victor.gerenciadorlivrosapi.repositories.connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  *
  * @author Victor Wanderley <wanderley.victor>
  */
+@SpringBootTest
 public class ConnectionFactoryTest {
     
     public ConnectionFactoryTest() {

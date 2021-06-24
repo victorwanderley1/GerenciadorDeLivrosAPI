@@ -6,6 +6,7 @@
 package com.wanderley.victor.gerenciadorlivrosapi.repositories;
 
 import com.wanderley.victor.gerenciadorlivrosapi.model.Autor;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +24,7 @@ public class AutorRepositoryTest {
     public void testFindAll() {
         System.out.println("findAll");
         AutorRepository instance = new AutorRepositoryImpl();
-        List<Autor> expResult = null;
+        List<Autor> expResult = new ArrayList();
         List<Autor> result = instance.findAll();
         assertTrue(expResult.addAll(result));
     }
