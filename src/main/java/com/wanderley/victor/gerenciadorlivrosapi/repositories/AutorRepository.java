@@ -15,5 +15,5 @@ import java.util.List;
 public interface AutorRepository {
 
     List<Autor> findAll();
-    
+    Boolean addAutor(final Autor autor);
 }

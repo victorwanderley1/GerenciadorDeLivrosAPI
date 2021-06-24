@@ -25,4 +25,9 @@ public class AutorServiceImpl implements AutorService {
     public List<Autor> findAll(){
         return autorRepository.findAll();
     }
+
+    @Override
+    public Boolean addAutor(final Autor autor) {
+        return autorRepository.addAutor(autor);
+    }
 }

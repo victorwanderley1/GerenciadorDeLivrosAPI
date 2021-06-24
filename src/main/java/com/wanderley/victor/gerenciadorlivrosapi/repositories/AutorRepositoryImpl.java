@@ -15,9 +15,16 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class AutorRepositoryImpl implements AutorRepository {
+    AutorDAO autorDAO = new AutorDAOImpl();
+    //<-------------------------Metodos de Busca------------------------------->
     @Override
     public List<Autor> findAll(){
-         return new AutorDAO().findAll();
+        return autorDAO.findAll();
+    }
+    //<------------------------Métodos insert---------------------------------->
+    @Override
+    public Boolean addAutor(final Autor autor) {
+        return autorDAO.addAutor(autor);
     }
     
 }
