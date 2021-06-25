@@ -6,6 +6,7 @@
 package com.wanderley.victor.gerenciadorlivrosapi.controllers;
 
 import com.wanderley.victor.gerenciadorlivrosapi.model.Autor;
+import com.wanderley.victor.gerenciadorlivrosapi.model.AutorImpl;
 import com.wanderley.victor.gerenciadorlivrosapi.services.AutorService;
 import com.wanderley.victor.gerenciadorlivrosapi.services.AutorServiceImpl;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -34,7 +36,9 @@ public class AutorController {
     }
     
     @PostMapping("/novo")
-    public ResponseEntity<Boolean> addAutor(@RequestBody final Autor autor){
+    public ResponseEntity<Boolean> addAutor(@RequestParam final String nome,
+            final String sobrenome){
+        Autor autor = new AutorImpl(nome, sobrenome);
         return new ResponseEntity(autorService.addAutor(autor), HttpStatus.CREATED);
     }
     
