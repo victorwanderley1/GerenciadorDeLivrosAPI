@@ -19,15 +19,23 @@ import com.wanderley.victor.gerenciadorlivrosapi.repositories.AutorRepositoryImp
 @Service
 public class AutorServiceImpl implements AutorService {
     
+    //<-------------------------Metodos de Busca------------------------------->
     @Autowired
     AutorRepository autorRepository = new AutorRepositoryImpl();
     @Override
     public List<Autor> findAll(){
         return autorRepository.findAll();
     }
-
+    //<------------------------Métodos insert---------------------------------->
     @Override
     public Boolean addAutor(final Autor autor) {
         return autorRepository.addAutor(autor);
+    }
+    //<--------------------------Metodos Delete-------------------------------->
+    @Override
+    public Boolean deleteAutor(Integer id) {
+        if(id > 0){
+            return autorRepository.deleteAutor(id);
+        }return false;
     }
 }

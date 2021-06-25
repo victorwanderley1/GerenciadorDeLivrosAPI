@@ -26,5 +26,11 @@ public class AutorRepositoryImpl implements AutorRepository {
     public Boolean addAutor(final Autor autor) {
         return autorDAO.addAutor(autor);
     }
+    //<--------------------------Metodos Delete-------------------------------->
+    @Override
+    public Boolean deleteAutor(Integer idAutor) {
+        return autorDAO.deleteAutor(idAutor);
+    }
+    
     
 }

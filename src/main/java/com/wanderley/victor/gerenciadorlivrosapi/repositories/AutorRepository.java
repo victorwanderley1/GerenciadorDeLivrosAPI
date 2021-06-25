@@ -16,4 +16,5 @@ public interface AutorRepository {
 
     List<Autor> findAll();
     Boolean addAutor(final Autor autor);
+    Boolean deleteAutor(final Integer idAutor);
 }
