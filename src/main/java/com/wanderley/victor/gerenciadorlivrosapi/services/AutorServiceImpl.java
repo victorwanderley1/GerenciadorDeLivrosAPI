@@ -38,4 +38,9 @@ public class AutorServiceImpl implements AutorService {
             return autorRepository.deleteAutor(id);
         }return false;
     }
+    //<--------------------------Métodos Update-------------------------------->
+    @Override
+    public Boolean updateAutor(final Integer id, final Autor autor){
+        return autorRepository.updateAutor(id, autor);
+    }
 }

@@ -17,4 +17,5 @@ public interface AutorRepository {
     List<Autor> findAll();
     Boolean addAutor(final Autor autor);
     Boolean deleteAutor(final Integer idAutor);
+    Boolean updateAutor(final Integer id, final Autor autor);
 }

@@ -7,6 +7,7 @@ package com.wanderley.victor.gerenciadorlivrosapi.repositories;
 
 import com.wanderley.victor.gerenciadorlivrosapi.model.Autor;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -22,7 +23,7 @@ public interface AutorDAO {
     //<-------------------------Metodos de Busca------------------------------->
     List<Autor> findAll();
     Autor findById(final Integer id);
-
+    Set<Integer> idsValidos();
     //<--------------------------Métodos Update-------------------------------->
     Boolean updateAutor(final Integer id, final Autor autor);
     

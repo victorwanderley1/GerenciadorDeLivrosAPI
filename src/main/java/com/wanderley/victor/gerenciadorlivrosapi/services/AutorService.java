@@ -17,5 +17,6 @@ public interface AutorService {
     List<Autor> findAll();
     Boolean addAutor(final Autor autor);
     Boolean deleteAutor(final Integer id);
+    Boolean updateAutor(final Integer id, final Autor autor);
     
 }

@@ -14,7 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -86,6 +88,36 @@ class AutorDAOImpl implements AutorDAO {
         return prst;
     }
     
+    @Override
+    public Set<Integer> idsValidos(){
+        try(Connection connection = ConnectionFactory.getConnection()){
+            return getIdsValidos(connection);
+        }catch(SQLException e){
+            throw new FalhaConexaoException(e.getMessage());
+        }
+    }
+    
+    private String getSqlIds(){
+        return "SELECT idautor FROM autor";
+    }
+    
+    private PreparedStatement getPreparedStatementIds(final Connection connection) throws SQLException{
+        return connection.prepareStatement(getSqlIds());
+    }
+    
+    private ResultSet getResultSetIds(final Connection connection) throws SQLException{
+        return getPreparedStatementIds(connection).executeQuery();
+    }
+    
+    private Set<Integer> getIdsValidos(final Connection connection) throws SQLException{
+        ResultSet result = getResultSetIds(connection);
+        Set<Integer> ids = new HashSet();
+        while(result.next()){
+            ids.add(result.getInt("idautor"));
+        }
+        return ids;
+    }
+    
     
     //<------------------------Métodos insert---------------------------------->
     
@@ -154,7 +186,7 @@ class AutorDAOImpl implements AutorDAO {
         try(Connection connection = ConnectionFactory.getConnection()){
             Autor autorDB = findById(id);
             setNomeSobrenomeAutor(autor, autorDB);
-            return getPreparedStatementUpdate(connection, autorDB).executeUpdate() != 0;
+            return getPreparedStatementUpdate(connection, id, autorDB).executeUpdate() > 0;
         }catch (SQLException e){
             throw new FalhaConexaoException(e.getMessage());
         }
@@ -174,11 +206,12 @@ class AutorDAOImpl implements AutorDAO {
     }
 
     private PreparedStatement getPreparedStatementUpdate(final Connection connection, 
-            final Autor autorDB) throws SQLException {
+            final Integer id, final Autor autorDB) throws SQLException {
         PreparedStatement prst = connection.prepareStatement(getSqlUpdate());
         prst.setString(1, autorDB.getNome());
         prst.setString(2, autorDB.getSobrenome());
+        prst.setInt(3, id);
         return prst;
     }
-    
+       
 }
