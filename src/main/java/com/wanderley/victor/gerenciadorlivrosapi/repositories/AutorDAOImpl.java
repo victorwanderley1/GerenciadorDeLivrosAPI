@@ -103,7 +103,7 @@ class AutorDAOImpl implements AutorDAO {
     }
     
     private String getSQLAdd(){
-        return "INSERT INTO autor(idautor, nome, sobrenome) VALUES (?,?)";
+        return "INSERT INTO autor(nome, sobrenome) VALUES (?,?)";
     }
     
     private PreparedStatement getPreparedStatementAdd(final Connection connection) throws SQLException{
